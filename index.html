@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReminderMe — Email Reminder App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h1 class="brand reveal">ReminderMe</h1>
+        <p class="tagline reveal" style="--delay: .1s;">Create, schedule, and never forget again.</p>
+        <a href="#create" class="cta reveal" style="--delay: .2s;">Create a Reminder</a>
+      </div>
+      <div class="hero-art reveal" style="--delay: .25s;">
+        <!-- Animated Mail SVG -->
+        <svg class="mail-anim" viewBox="0 0 240 200" aria-hidden="true">
+          <!-- Envelope shadow -->
+          <ellipse cx="120" cy="168" rx="60" ry="12" class="shadow"/>
+          <!-- Envelope body -->
+          <g class="envelope">
+            <rect x="60" y="60" width="120" height="80" rx="10" class="env-body"/>
+            <path d="M60 60 L120 110 L180 60" class="env-flap-line"/>
+            <path d="M60 60 L120 100 L180 60 L180 140 L60 140 Z" class="env-front"/>
+            <path d="M60 60 L120 110 L180 60" class="env-front-line"/>
+            <!-- Flap -->
+            <path d="M60 60 L120 90 L180 60 L180 60 L60 60 Z" class="env-flap"/>
+          </g>
+          <!-- Paper leaving the envelope -->
+          <g class="paper">
+            <rect x="98" y="40" width="44" height="54" rx="3" class="paper-rect"/>
+            <line x1="104" y1="52" x2="136" y2="52" class="paper-line"/>
+            <line x1="104" y1="60" x2="136" y2="60" class="paper-line"/>
+            <line x1="104" y1="68" x2="136" y2="68" class="paper-line"/>
+          </g>
+          <!-- Sparkles -->
+          <g class="spark s1"><circle cx="48" cy="58" r="3"/></g>
+          <g class="spark s2"><circle cx="194" cy="54" r="3"/></g>
+          <g class="spark s3"><circle cx="180" cy="150" r="3"/></g>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card reveal" id="create">
+      <h2>Create / Edit Reminder</h2>
+      <form id="reminderForm" method="post" action="create_reminder.php" novalidate>
+        <input type="hidden" id="reminder_id" name="reminder_id" value="" />
+        <div class="grid">
+          <div class="field">
+            <label for="title">Title <span aria-hidden="true">*</span></label>
+            <input id="title" name="title" type="text" required maxlength="120" placeholder="Doctor appointment" />
+            <small class="error" id="err_title"></small>
+          </div>
+
+          <div class="field">
+            <label for="date">Date <span aria-hidden="true">*</span></label>
+            <input id="date" name="date" type="date" required />
+            <small class="error" id="err_date"></small>
+          </div>
+
+          <div class="field">
+            <label for="time">Time <span aria-hidden="true">*</span></label>
+            <input id="time" name="time" type="time" required />
+            <small class="error" id="err_time"></small>
+          </div>
+
+          <div class="field">
+            <label for="frequency">Frequency</label>
+            <select id="frequency" name="frequency">
+              <option value="once" selected>Once</option>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="message">Message <span aria-hidden="true">*</span></label>
+          <textarea id="message" name="message" rows="5" required placeholder="Don't forget to bring your ID."></textarea>
+          <small class="error" id="err_message"></small>
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="submitBtn" class="btn">Create Reminder</button>
+          <button type="button" id="resetBtn" class="btn secondary">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card reveal">
+      <div class="list-header">
+        <h2>Your Reminders</h2>
+        <button id="refreshBtn" class="btn secondary">Refresh</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Scheduled</th>
+              <th>Frequency</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="remindersTbody">
+            <tr><td colspan="5" class="muted">No reminders yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container muted">
+    <p>Built with HTML/CSS/JS — Ready to connect to PHP endpoints (create/list/update/delete).</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
