@@ -145,6 +145,10 @@ form.addEventListener('submit', async (e) => {
     frequency: document.getElementById('frequency').value
   };
 
+  console.log('Payload object:', payload);
+  console.log('Payload JSON string:', JSON.stringify(payload));
+
+
   const isUpdate = !!payload.id;
   const url = isUpdate ? ENDPOINTS.update : ENDPOINTS.create;
 
